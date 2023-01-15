@@ -66,15 +66,6 @@ public class PlayerMovement : MonoBehaviour
         }
         if (fingerDown)
         {
-            //Is the current mouse position 'pixelDistToDetect' away from 'startPos' on y-axis?
-            if (Input.mousePosition.y >= startPos.y + pixelDistToDetect)
-            {
-                fingerDown = false;
-                Debug.Log("Swipe up");
-            }
-        }
-        if (fingerDown)
-        {
             //Did we swipe up?
             if (Input.touches[0].position.y >= startPos.y + pixelDistToDetect)
             {

@@ -1,0 +1,157 @@
+{
+    "m_SelectedDeviceId": "RF8N50F2J7K",
+    "m_SelectedPackage": {
+        "deviceId": "RF8N50F2J7K",
+        "name": "com.DefaultCompany.SubSrf",
+        "processId": 22801,
+        "exited": false
+    },
+    "m_SelectedPriority": 0,
+    "m_KnownPackagesForSerialization": [
+        {
+            "deviceId": "RF8N50F2J7K",
+            "name": "com.DefaultCompany.SubSrf",
+            "processId": 19818,
+            "exited": true
+        },
+        {
+            "deviceId": "RF8N50F2J7K",
+            "name": "com.DefaultCompany.SubSrf",
+            "processId": 22951,
+            "exited": true
+        },
+        {
+            "deviceId": "RF8N50F2J7K",
+            "name": "com.DefaultCompany.SubSrf",
+            "processId": 31173,
+            "exited": true
+        },
+        {
+            "deviceId": "RF8N50F2J7K",
+            "name": "com.DefaultCompany.SubSrf",
+            "processId": 3428,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N50F2J7K",
+            "name": "com.DefaultCompany.SubSrf",
+            "processId": 6986,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N50F2J7K",
+            "name": "com.DefaultCompany.SubSrf",
+            "processId": 9214,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N50F2J7K",
+            "name": "com.DefaultCompany.SubSrf",
+            "processId": 10161,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N50F2J7K",
+            "name": "com.DefaultCompany.SubSrf",
+            "processId": 11201,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N50F2J7K",
+            "name": "com.DefaultCompany.SubSrf",
+            "processId": 15739,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N50F2J7K",
+            "name": "com.DefaultCompany.SubSrf",
+            "processId": 17593,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N50F2J7K",
+            "name": "com.DefaultCompany.SubSrf",
+            "processId": 18548,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N50F2J7K",
+            "name": "com.DefaultCompany.SubSrf",
+            "processId": 21212,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N50F2J7K",
+            "name": "com.DefaultCompany.SubSrf",
+            "processId": 22801,
+            "exited": false
+        }
+    ],
+    "m_Tags": {
+        "m_Entries": [
+            {
+                "m_Name": "Filter by all listed tags",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "No Filter",
+                "m_Selected": true
+            },
+            {
+                "m_Name": "",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "Tag Control...",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "Unity",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "CRASH",
+                "m_Selected": false
+            }
+        ]
+    },
+    "m_MemoryViewerState": {
+        "MemoryWindowHeight": 300.0,
+        "MemoryWindowWidth": 170.0,
+        "MemoryTypeEnabled": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        "MemoryGroup": 2,
+        "Behavior": 0
+    },
+    "m_FilterOptions": {
+        "m_Filter": "Swipe",
+        "m_UseRegularExpressions": false,
+        "m_MatchCase": false
+    },
+    "m_SymbolPaths": [],
+    "m_CaptureVideoSettings": {
+        "TimeLimitEnabled": false,
+        "TimeLimit": 180,
+        "VideoSizeEnabled": false,
+        "VideoSizeX": 1280,
+        "VideoSizeY": 720,
+        "BitRateEnabled": false,
+        "BitRateK": 20000,
+        "DisplayIdEnabled": false,
+        "DisplayId": ""
+    }
+}

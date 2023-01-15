@@ -1,17 +1,8 @@
-using UnityEngine;
+﻿using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private const KeyCode _oneFingerTapKeyCode = (KeyCode)330;
-    private const KeyCode _oneFingerHoldKeyCode = (KeyCode)319;
-    private const KeyCode _oneFingerSwipeBackKeyCode = (KeyCode)276;
-    private const KeyCode _oneFingerSwipeForwardKeyCode = (KeyCode)275;
-    private const KeyCode _oneFingerSwipeUpKeyCode = (KeyCode)273;
-    private const KeyCode _oneFingerSwipeDownKeyCode = (KeyCode)274;
-    private const KeyCode _twoFingerTapKeyCode = (KeyCode)27;
-    private const KeyCode _twoFingerHoldKeyCode = (KeyCode)278;
-    private const KeyCode _twoFingerSwipeForwardKeyCode = (KeyCode)127;
-    private const KeyCode _twoFingerSwipeBackKeyCode = (KeyCode)8;
 
     [Header("Movement")] public float moveSpeed;
 
@@ -22,9 +13,11 @@ public class PlayerMovement : MonoBehaviour
     public float airMultiplier;
     public bool readyToJump;
 
-    [Header("Keybinds")] public KeyCode jumpKey = KeyCode.Space;
+    [Header("Keybinds")] 
+    public KeyCode jumpKey = KeyCode.Space;
 
-    [Header("Ground Check")] public float playerHeight;
+    [Header("Ground Check")] 
+    public float playerHeight;
 
     public LayerMask whatisGround;
 
@@ -44,6 +37,11 @@ public class PlayerMovement : MonoBehaviour
 
     float y;
 
+  
+    private Vector2 startPos;
+    public int pixelDistToDetect = 20;
+    private bool fingerDown;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +51,54 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (fingerDown == false && Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
+        {
+            // If so, we're going to set the startPos to the first touch's position, 
+            startPos = Input.touches[0].position;
+            // ... and set fingerDown to true to start checking the direction of the swipe.
+            fingerDown = true;
+        }
+        if (fingerDown && Input.GetMouseButtonDown(0))
+        {
+            startPos = Input.mousePosition;
+            fingerDown = true;
+          
+        }
+        if (fingerDown)
+        {
+            //Is the current mouse position 'pixelDistToDetect' away from 'startPos' on y-axis?
+            if (Input.mousePosition.y >= startPos.y + pixelDistToDetect)
+            {
+                fingerDown = false;
+                Debug.Log("Swipe up");
+            }
+        }
+        if (fingerDown)
+        {
+            //Did we swipe up?
+            if (Input.touches[0].position.y >= startPos.y + pixelDistToDetect)
+            {
+                fingerDown = false;
+                Debug.Log("Swipe up");
+            }
+            //Did we swipe left?
+            else if (Input.touches[0].position.x <= startPos.x - pixelDistToDetect)
+            {
+                fingerDown = false;
+                Debug.Log("Swipe left");
+            }
+            //Did we swipe right?
+            else if (Input.touches[0].position.x >= startPos.x + pixelDistToDetect)
+            {
+                fingerDown = false;
+                Debug.Log("Swipe right");
+            }
+            else if(Input.touches[0].position.y <= startPos.y - pixelDistToDetect)
+            {
+                fingerDown = false;
+                Debug.Log("Swipe down");
+            }
+        }
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f);
 
         MyInput();
@@ -78,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        if (Input.GetKey(_oneFingerSwipeUpKeyCode) && readyToJump && grounded)
+        if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
             Jump();

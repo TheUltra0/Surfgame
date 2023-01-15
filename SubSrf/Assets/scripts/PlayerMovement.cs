@@ -51,45 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (fingerDown == false && Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
-        {
-            // If so, we're going to set the startPos to the first touch's position, 
-            startPos = Input.touches[0].position;
-            // ... and set fingerDown to true to start checking the direction of the swipe.
-            fingerDown = true;
-        }
-        if (fingerDown && Input.GetMouseButtonDown(0))
-        {
-            startPos = Input.mousePosition;
-            fingerDown = true;
-          
-        }
-        if (fingerDown)
-        {
-            //Did we swipe up?
-            if (Input.touches[0].position.y >= startPos.y + pixelDistToDetect)
-            {
-                fingerDown = false;
-                Debug.Log("Swipe up");
-            }
-            //Did we swipe left?
-            else if (Input.touches[0].position.x <= startPos.x - pixelDistToDetect)
-            {
-                fingerDown = false;
-                Debug.Log("Swipe left");
-            }
-            //Did we swipe right?
-            else if (Input.touches[0].position.x >= startPos.x + pixelDistToDetect)
-            {
-                fingerDown = false;
-                Debug.Log("Swipe right");
-            }
-            else if(Input.touches[0].position.y <= startPos.y - pixelDistToDetect)
-            {
-                fingerDown = false;
-                Debug.Log("Swipe down");
-            }
-        }
+        
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f);
 
         MyInput();
@@ -115,13 +77,58 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (fingerDown == false && Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
         {
-            readyToJump = false;
-            Jump();
-
-            Invoke(nameof(ResetJump), jumpCooldown);
+            // If so, we're going to set the startPos to the first touch's position, 
+            startPos = Input.touches[0].position;
+            // ... and set fingerDown to true to start checking the direction of the swipe.
+            fingerDown = true;
         }
+        if (fingerDown && Input.GetMouseButtonDown(0))
+        {
+            startPos = Input.mousePosition;
+            fingerDown = true;
+
+        }
+        if (fingerDown)
+        {
+            //Did we swipe up?
+            if (Input.touches[0].position.y >= startPos.y + pixelDistToDetect)
+            {
+                fingerDown = false;
+                if (readyToJump && grounded)
+                {
+                    readyToJump = false;
+                    Jump();
+                    Invoke(nameof(ResetJump), jumpCooldown);
+                }
+            }
+            //Did we swipe left?
+            else if (Input.touches[0].position.x <= startPos.x - pixelDistToDetect)
+            {
+                fingerDown = false;
+                Debug.Log("Swipe left");
+            }
+            //Did we swipe right?
+            else if (Input.touches[0].position.x >= startPos.x + pixelDistToDetect)
+            {
+                fingerDown = false;
+                Debug.Log("Swipe right");
+            }
+            else if (Input.touches[0].position.y <= startPos.y - pixelDistToDetect)
+            {
+                fingerDown = false;
+                
+                Crouch();
+                
+            }
+        }
+        //transform.rotation=Quaternion.Euler(xRotation, yRotation, 0);
+        //rb.MovePosition(transform.position + new Vector3(0, 0, 2f) * Time.deltaTime * 10f);
+
+        //rb.AddForce(moveDirection.normalized * 10f * 10f, ForceMode.Force);
+
+        
     }
 
     // Update is called once per frame
@@ -167,6 +174,12 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    }
+    void Crouch()
+    {
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        rb.AddForce(-transform.up * jumpForce*2f, ForceMode.Impulse);
     }
 
     void ResetJump()

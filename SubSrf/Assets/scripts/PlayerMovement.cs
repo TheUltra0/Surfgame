@@ -83,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
             startPos = Input.touches[0].position;
             // ... and set fingerDown to true to start checking the direction of the swipe.
             fingerDown = true;
+            
         }
         if (fingerDown && Input.GetMouseButtonDown(0))
         {

@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "RF8N50F2J7K",
         "name": "com.DefaultCompany.SubSrf",
-        "processId": 4402,
+        "processId": 7636,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -132,6 +132,12 @@
             "deviceId": "RF8N50F2J7K",
             "name": "com.DefaultCompany.SubSrf",
             "processId": 4402,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8N50F2J7K",
+            "name": "com.DefaultCompany.SubSrf",
+            "processId": 7636,
             "exited": false
         }
     ],

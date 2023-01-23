@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using static UnityEngine.ParticleSystem;
 
 public class PlayerMovement : MonoBehaviour
@@ -42,6 +43,15 @@ public class PlayerMovement : MonoBehaviour
     public int pixelDistToDetect = 20;
     private bool fingerDown;
 
+
+    public KeyCode moveL;
+    public KeyCode moveR;
+    public int forwardSpeed;
+    public float horizVel = 0;
+    public float horizSpeed = 10;
+    public int laneNum = 2;
+    public bool controlBlocked;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +61,32 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        
+        GetComponent<Rigidbody>().velocity = new Vector3(horizVel, 0, forwardSpeed);
+
+        if (Input.GetKeyDown(moveL) && (laneNum > 1) && (controlBlocked == false))
+        {
+            horizVel = -horizSpeed;
+            laneNum -= 1;
+            controlBlocked = true;
+            StartCoroutine(stopSlide());
+            
+        }
+
+        if (Input.GetKeyDown(moveR) && (laneNum < 3) && (controlBlocked == false))
+        {
+            horizVel = horizSpeed;
+            laneNum += 1;
+            controlBlocked = true;
+            StartCoroutine(stopSlide());
+           
+        }
+        Debug.Log(horizVel);
+        Debug.Log(controlBlocked);
+
+
+
+
+
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f);
 
         MyInput();
@@ -66,10 +101,16 @@ public class PlayerMovement : MonoBehaviour
             rb.drag = 0;
         }
     }
+    IEnumerator stopSlide()
+    {
+        yield return new WaitForSeconds(.5f);
+        horizVel = 0;
+        controlBlocked = false;
+    }
 
     void FixedUpdate()
     {
-        MovePlayer();
+        //MovePlayer();
     }
 
     void MyInput()
@@ -135,6 +176,13 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void MovePlayer()
     {
+
+        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        {
+            readyToJump = false;
+            Jump();
+            Invoke(nameof(ResetJump), jumpCooldown);
+        }
         y = camera.rotation.eulerAngles.y;
 
         //transform.rotation=Quaternion.Euler(xRotation, yRotation, 0);
